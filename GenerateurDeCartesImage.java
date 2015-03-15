@@ -2,6 +2,14 @@ class GenerateurDeCartesImage extends GenerateurDeCartes {
 
 	protected String nom = "Image";
 
+	public GenerateurDeCartesImage(String nom) {
+		this.nom = nom;
+	}
+
+	public String getNom() {
+		return this.nom;
+	}
+
 	/**
 	 * Retourne une référence de type Carte à une carte choisie aléatoirement parmi celles du thème.
 	 * @return Carte

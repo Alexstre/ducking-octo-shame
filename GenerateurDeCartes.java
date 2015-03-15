@@ -2,9 +2,7 @@ abstract class GenerateurDeCartes {
 
 	protected String nom;
 
-	public String getNom() {
-		return this.nom;
-	}
+	abstract String getNom();
 
 	/**
 	 * Retourne une référence de type Carte à une carte choisie aléatoirement parmi celles du thème.
@@ -25,7 +23,11 @@ abstract class GenerateurDeCartes {
 	 * @return Carte[]
 	 */
 	public Carte[] genereCartes(int n) {
-		return new Carte[5];
+		Carte[] cartes = new Carte[n];
+		for (int i = 0; i < n; i++) {
+			cartes[i] = genereUneCarte(); 
+		}
+		return cartes;
 	}
 
 	/**
@@ -35,7 +37,15 @@ abstract class GenerateurDeCartes {
 	 * @return Carte[]
 	 */
 	public Carte[] generePairesDeCartesMelangees(int n) {
-		return new Carte[5];
+		// Débute par générer n cartes avec genereCartes
+		Carte[] cartes = new Carte[2*n];
+		int i = -1;
+		for (Carte carte: genereCartes(n)) {
+			cartes[++i] = carte;
+			cartes[++i] = carte.duplique();
+		}
+		Carte.melangeCartes(cartes);
+		return cartes;
 	}
 
 }
