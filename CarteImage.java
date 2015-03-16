@@ -2,23 +2,31 @@ import java.awt.*;
 import javax.swing.*;
 
 /**
- * Classe CarteImage
+ * Classe CarteImage implémente une carte qui comprend une image
  * @author Alex Marcotte
- * @see #Carte
+ * @see Carte
  */
-
 @SuppressWarnings("serial")
 class CarteImage extends Carte {
 
 	protected boolean recto;
 	protected ImageIcon image;
 
+	/**
+	 * Constructeur
+	 * @param recto 	Un booléen si le dessus de la carte est affichée
+	 * @param img 		Une image à ajouter sur la carte
+	 */
 	public CarteImage(boolean recto, ImageIcon img) {
 		super(recto);
 		this.image = img;
 		System.out.println("Constructeur de CarteImage");
 	}
 
+	/**
+	 * Constructeur de copie
+	 * @param c 	Une carte à copier
+	 */
 	public CarteImage(Carte c) {
 		super(c);
 		System.out.println("Constructeur de copie de CarteImage");
@@ -26,7 +34,8 @@ class CarteImage extends Carte {
 
 	/**
 	 * Implementation de duplique
- 	 * @return Carte	 
+ 	 * @return Carte
+ 	 * @see Carte#duplique
 	 */
 	public Carte duplique() {
 		CarteImage carte = new CarteImage(estMontree(), this.image);
@@ -35,8 +44,8 @@ class CarteImage extends Carte {
 
 	/**
 	 * Implemente rectoIdentique pour determiner si deux cartes sont identiques
-	 * @param Carte c
-	 * @return boolean true si les cartes sont identiques
+	 * @param c 		Une carte avec laquelle comparée
+	 * @return boolean 	true si les cartes sont identiques
 	 */
 	public boolean rectoIdentique(Carte c) {
 		System.out.println("This: " + this.image + " Other: " + ((CarteImage)c).image);
@@ -44,8 +53,8 @@ class CarteImage extends Carte {
 	}
 
 	/**
-	 * Implementation de paintRecto
-	 * Methode pour peindre le verso
+	 * Implementation de paintRecto pour peindre le verso
+	 * @param g un contexte graphique Graphics2D
 	 */
 	public void paintRecto(Graphics2D g) {
 		Dimension dimen = getSize();
@@ -53,7 +62,11 @@ class CarteImage extends Carte {
 		System.out.format("paintRecto dans CarteMot (%d, %d)%n", dimen.width, dimen.height);
 	}
 
+	/**
+	 * Méthode toString retourne une String qui représente la carte
+	 * @return String
+	 */
 	public String toString() {
-		return "CarteImage()";
+		return "CarteImage avec " + this.image.getImage();
 	}
 }

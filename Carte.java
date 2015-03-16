@@ -7,9 +7,7 @@ import javax.swing.Timer;
 /**
  * Classe Abstraite Carte
  * @author Alex Marcotte
- * @see #CarteCouleur
- * @see #CarteMot
- * @see #CarteImage
+ * @since Mars 2015
  */
 @SuppressWarnings("serial")
 abstract class Carte extends JComponent {
@@ -23,21 +21,11 @@ abstract class Carte extends JComponent {
 
 	/**
 	 * Constructeur pour la classe Carte
-	 * @param boolean recto
-	 * @return Carte
+	 * @param recto Détermine si la carte affiche son recto
 	 */
 	protected Carte(boolean recto) {
 		this.recto = recto;
 		System.out.println("Constructeur de Carte, recto = " + this.recto);
-	}
-
-	/**
-	 * Constructeur de copie
-	 * @param Carte c
-	 * @return Carte
-	 */
-	protected Carte(Carte c) {
-		System.out.println("Hi");
 	}
 
 	/**
@@ -88,7 +76,7 @@ abstract class Carte extends JComponent {
 	 * Peint le verso d'une carte dans le contexte graphique g
 	 * Puisque les cartes on toutes le même verso, pas besoin de 
 	 * redéfinir dans les sous-classes de Carte
-	 * @param Graphics2D g Context graphique
+	 * @param g Context graphique
 	 */
 	public void paintVerso(Graphics2D g) {
 		Dimension dimen = getSize();
@@ -97,16 +85,14 @@ abstract class Carte extends JComponent {
 	}
 
 	/**
-	 * Methode abstraite pour peindre le verso, pour implementation;
- 	 * @see #CarteCouleur
- 	 * @see #CarteMot
- 	 * @see #CarteImage
+	 * Methode abstraite pour peindre le verso, pour implementation
+	 * @param g Un contexte graphique Graphics2D
 	 */
 	abstract void paintRecto(Graphics2D g);
 
 	/**
 	 * Redefinition de paintComponent qui appelle paintRecto ou paintVerso
-	 * @param Graphics g
+	 * @param g Un contexte graphique Graphics
 	 */
 	@Override
 	public void paintComponent(Graphics g) {
@@ -122,26 +108,20 @@ abstract class Carte extends JComponent {
 
 	/**
 	 * Methode abstraite pour determiner si deux cartes sont identiques
-	 * @param Carte c
-	 * @return boolean True si les cartes sont identiques
-	 * @see #CarteCouleur
- 	 * @see #CarteMot
- 	 * @see #CarteImage
+	 * @param c 		Une carte avec laquelle comparer
+	 * @return boolean 	True si les cartes sont identiques
 	 */
 	abstract boolean rectoIdentique(Carte c);
 
 	/**
 	 * Methode abstraite pour retourner une copie identique d'un object
- 	 * @see #CarteCouleur
- 	 * @see #CarteMot
- 	 * @see #CarteImage
  	 * @return Carte	 
 	 */
 	public abstract Carte duplique();
 
 	/**
 	 * Methode pour melanger un tableau d'instance de Carte
-	 * @param Carte[] cartes Un tableau d'objets de type Carte
+	 * @param cartes Un tableau d'objets de type Carte
 	 */
 	public static void melangeCartes(Carte[] cartes) {
 		Random r = new Random();
@@ -154,10 +134,18 @@ abstract class Carte extends JComponent {
 		}
 	}
 
+	/**
+	 * Méthode getMulti retourne le multiplicateur de grandeur pour la carte
+	 * @return int
+	 */
 	public int getMulti() {
 		return this.multi;
 	}
 
+	/**
+	 * Méthode setMulti modifie le multiplicateur de grandeur
+	 * @param multi 	Un entier
+	 */
 	public void setMulti(int multi) {
 		this.multi = multi;
 	}

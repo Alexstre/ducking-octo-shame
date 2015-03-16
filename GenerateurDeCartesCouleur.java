@@ -1,3 +1,9 @@
+/**
+ * Classe GenerateurDeCartesCouleur
+ * @author Alex Marcotte
+ * @since Mars 2015
+ * @see GenerateurDeCartes
+ */
 class GenerateurDeCartesCouleur extends GenerateurDeCartes {
 
 	public String nom = "Couleur";
@@ -6,6 +12,10 @@ class GenerateurDeCartesCouleur extends GenerateurDeCartes {
 		this.nom = nom;
 	}
 
+	/**
+	 * Méthode getNom retourne le nom du générateur
+	 * @return string Le nom du générateur
+	 */
 	public String getNom() {
 		return this.nom;
 	}
@@ -21,7 +31,7 @@ class GenerateurDeCartesCouleur extends GenerateurDeCartes {
 
 	/**
 	 * Retourne un entier indiquant le nombre de cartes différentes disponibles dans ce thème
-	 * @param int
+	 * @return int
 	 */
 	public int nombreDeCartesDifferentes() {
 		return 8;

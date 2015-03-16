@@ -2,8 +2,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+
+/**
+ * Classe JeuMemory. Classe principale du jeu.
+ * @author Alex Marcotte
+ * @since Mars 2015
+ **/
+
 class JeuMemory {
 
+	/**
+	 * Methode main
+	 * @param args Paramètres entrés par ligne de commande
+	 */
 	public static void main(String[] args) {
 		if (args.length < 5) {
 			afficheAide();
@@ -38,6 +49,10 @@ class JeuMemory {
 		System.out.println("5: Mélange des thèmes 0 à 4");
 	}
 
+	/**
+	 * Classe InterfaceJeu représente les éléments graphiques du jeu
+	 * @see JeuMemory
+	 */
 	public static class InterfaceJeu {
 		private GenerateurDeCartes generateur;
 		private PanneauDeCartes panneau;
@@ -51,6 +66,14 @@ class JeuMemory {
 		private JFrame frame;
 		private Carte[] cartes;
 
+		/**
+		 * Constructeur pour InterfaceJeu
+		 * @param rangees			Nombre de rangées pour la grille de cartes
+		 * @param colonnes			Nombre de colonnes pour la grille
+		 * @param delai_initial		Délai initial avant de retourner les cartes
+		 * @param delai_erreur		Délai après une erreur avant de retourner les cartes
+		 * @param num_theme			Numéro du thème
+		 */
 		public InterfaceJeu(int rangees, int colonnes, int delai_initial, int delai_erreur, int num_theme) {
 			this.rangees = rangees;
 			this.colonnes = colonnes;
@@ -81,19 +104,16 @@ class JeuMemory {
 			cartes = generateur.generePairesDeCartesMelangees(rangees*colonnes/2);
 			panneau = new PanneauDeCartes(rangees, colonnes, cartes, delai_initial, delai_erreur);
 
-			/**
-			 * @var JFrame frame JFrame principale du jeu (contient PanneauDeCartes)
-			 */
+			// Le JFrame principal du jeu
 			frame = new JFrame("JeuMemory");
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame.setSize(colonnes*200, rangees*200);
 
+			// Un JPanel contiendra l'intérieur du jeu et un autre contient les boutons
 	 		inside = new JPanel(new BorderLayout());
-	 		boutons = new JPanel(new FlowLayout());		
+	 		boutons = new JPanel(new FlowLayout());
 
-			/**
-			 * @var JButton quitter Le bouton pour quitter
-			 */
+			// Bouton 'quitter' et son ActionListener
 			JButton quitter = new JButton("Quitter");
 			quitter.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -101,9 +121,7 @@ class JeuMemory {
 				}
 			});
 
-			/**
-			 * @var JButton recommencer Le bouton pour faire une nouvelle partie
-			 */
+			// Bouton 'recommencer' et son ActionListener
 			JButton recommencer = new JButton("Recommencer");
 			recommencer.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -137,9 +155,7 @@ class JeuMemory {
 				}
 			});
 
-			/**
-			 * @var JButton resoudre Le bouton pour resoudre
-			 */
+			// Bouton 'resoudre' et son ActionListener
 			JButton resoudre = new JButton("Resoudre");
 			resoudre.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -147,11 +163,12 @@ class JeuMemory {
 				}
 			});
 
+			// On ajoute les boutons au JPanel qui les contiendra
 			boutons.add(resoudre);
 			boutons.add(recommencer);
 			boutons.add(quitter);
 
-			// Ajoute les components au inside
+			// Ajoute les components au JPanel inside (panneau de cartes + boutons)
 			inside.add(panneau, BorderLayout.CENTER);
 			inside.add(boutons, BorderLayout.SOUTH);
 

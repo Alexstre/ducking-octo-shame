@@ -4,12 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Class ActionSourite extends MouseAdapter
- * Sera utilisé puisque MouseAdapter implémente déjà
- * l'interface MouseListener et donc on n'aura qu'a override
- * les méthodes utilisées. La grande majoritée de la logique du
- * jeu se trouve dans cette classe.
- * @see #MouseAdapter
+ * Class ActionSourite
+ * Sera utilisé puisque MouseAdapter implémente déjà l'interface MouseListener et donc on n'aura qu'a override
+ * les méthodes utilisées. La grande majoritée de la logique du jeu se trouve dans cette classe.
+ * @see MouseAdapter
  * @see MouseListener
  */
 class ActionSourie extends MouseAdapter {
@@ -25,11 +23,21 @@ class ActionSourie extends MouseAdapter {
 
 	boolean ignore = false;
 
+	/**
+	 * Constructeur
+	 * @param delaiAffichageMauvaisePaire	Délai avant de retourner les cartes
+	 * @param nombreDePaires 				Nombre de paires (pour savoir si le jeu est complet)
+	 */
 	public ActionSourie(int delaiAffichageMauvaisePaire, int nombreDePaires) {
 		this.delaiAffichageMauvaisePaire = delaiAffichageMauvaisePaire;
 		this.nombreDePaires = nombreDePaires;
 	}
 
+	/**
+	 * Méthode mouseClicked
+	 * @see MouseAdapter#mouseClicked
+	 * @param e Un MouseEvent qui contient l'objet cliqué
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (this.ignore) return;
@@ -38,9 +46,7 @@ class ActionSourie extends MouseAdapter {
 
 		clicks++;
 
-		/**
-		 * @var Carte carte la carte qui vient d'être choisie
-		 */
+		// La carte qui vient d'être choisie
 		Carte carte = castSourceEnCarte(e.getSource());
 
 		if (derniere == null) {
@@ -66,7 +72,7 @@ class ActionSourie extends MouseAdapter {
 				timer.setRepeats(false);
 				timer.start();
 
-			} else {
+			} else { // On a trouvé une paire, on veut donc 'reset' la dernière
 				pairesTrouvees++;
 				derniere = null;
 			}
@@ -86,6 +92,11 @@ class ActionSourie extends MouseAdapter {
 		}
 	}
 
+	/**
+	 * Méthode mouseEntered. Lancée lorsque le curseur entre sur une carte
+	 * @see MouseAdapter#mouseEntered
+	 * @param e Un MouseEvent
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		Carte carte = castComponentEnCarte(e.getComponent());
@@ -93,6 +104,12 @@ class ActionSourie extends MouseAdapter {
 		carte.repaint();
 	}
 
+
+	/**
+	 * Méthode mouseExisted. Lancée lorsque le curseur quitte une carte
+	 * @see MouseAdapter#mouseExited
+	 * @param e Un MouseEvent
+	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
 		Carte carte = castComponentEnCarte(e.getComponent());
@@ -100,6 +117,13 @@ class ActionSourie extends MouseAdapter {
 		carte.repaint();		
 	}
 
+	/**
+	 * Méthode castSourceEnCarte
+	 * @param source Un objet (fourni par un MouseEvent)
+	 * @return Carte Une instance de sous-classe de Carte appropriée
+	 * @see #mouseExited
+	 * @see #mouseEntered	 
+	 */
 	private Carte castSourceEnCarte(Object source) {
 		// On cast la source en la classe correspondante
 		if (source instanceof CarteCouleur) {
@@ -113,6 +137,13 @@ class ActionSourie extends MouseAdapter {
 		}
 	}
 
+	/**
+	 * Méthode castComponentEnCarte
+	 * @param c 		Un component (fourni par un MouseEvent)
+	 * @return Carte 	Une instance de sous-classe de Carte appropriée
+	 * @see #mouseExited
+	 * @see #mouseEntered
+	 */
 	private Carte castComponentEnCarte(Component c) {
 		// On cast la source en la classe correspondante
 		if (c instanceof CarteCouleur) {

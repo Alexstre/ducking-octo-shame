@@ -1,7 +1,18 @@
+/**
+ * Classe Abstraite GenerateurDeCartes
+ * Représente un générateur de carte. Doit être extends par des sous-classes
+ * qui génèrent des cartes sous-classe de la classe abstraite Classe
+ * @author Alex Marcotte
+ * @since Mars 2015
+ */
 abstract class GenerateurDeCartes {
 
 	protected String nom;
 
+	/**
+	 * Méthode getNom retourne le nom du générateur
+	 * @return string Le nom du générateur
+	 */
 	abstract String getNom();
 
 	/**
@@ -12,15 +23,15 @@ abstract class GenerateurDeCartes {
 
 	/**
 	 * Retourne un entier indiquant le nombre de cartes différentes disponibles dans ce thème
-	 * @param int
+	 * @return int 	Nombre de cartes dans le set
 	 */
 	abstract int nombreDeCartesDifferentes();
 
 	/**
 	 * Génére un tableau de n cartes selon le thème, si possible toutes différentes, en faisant des
 	 * appels répétés à genereUneCarte.
-	 * @param int n Nombre de cartes
-	 * @return Carte[]
+	 * @param n 		Nombre de cartes
+	 * @return Carte[]	Tableau de Carte
 	 */
 	public Carte[] genereCartes(int n) {
 		Carte[] cartes = new Carte[n];
@@ -33,8 +44,8 @@ abstract class GenerateurDeCartes {
 	/**
 	 * Génére 2n cartes par paires identiques, selon le thème, et les mélangera (cette méthode
 	 * devrait faire appel à genereCartes , et aux méthodes duplique et Carte.melangeCartes)
-	 * @param int n Nombre de paires
-	 * @return Carte[]
+	 * @param n 		Nombre de paires
+	 * @return Carte[]	Tableau de cartes
 	 */
 	public Carte[] generePairesDeCartesMelangees(int n) {
 		// Débute par générer n cartes avec genereCartes

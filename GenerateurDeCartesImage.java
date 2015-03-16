@@ -1,6 +1,12 @@
 import javax.swing.*;
 import java.util.Random;
 
+/**
+ * Classe GenerateurDeCartesImage
+ * @author Alex Marcotte
+ * @since Mars 2015
+ * @see GenerateurDeCartes
+ */
 class GenerateurDeCartesImage extends GenerateurDeCartes {
 
 	protected String nom = "Images";
@@ -12,12 +18,12 @@ class GenerateurDeCartesImage extends GenerateurDeCartes {
 		this.images = images;
 	}
 
+	/**
+	 * Méthode getNom retourne le nom du générateur
+	 * @return string Le nom du générateur
+	 */
 	public String getNom() {
 		return this.nom;
-	}
-
-	public String[] getImages() {
-		return this.images;
 	}
 
 	/**
@@ -32,7 +38,7 @@ class GenerateurDeCartesImage extends GenerateurDeCartes {
 
 	/**
 	 * Retourne un entier indiquant le nombre de cartes différentes disponibles dans ce thème
-	 * @param int
+	 * @return int
 	 */
 	public int nombreDeCartesDifferentes() {
 		return images.length;

@@ -1,5 +1,11 @@
 import java.util.Random;
 
+/**
+ * Classe GenerateurDeCartesMot
+ * @author Alex Marcotte
+ * @since Mars 2015
+ * @see GenerateurDeCartes
+ */
 class GenerateurDeCartesMot extends GenerateurDeCartes {
 
 	protected String nom = "Mot";
@@ -11,6 +17,10 @@ class GenerateurDeCartesMot extends GenerateurDeCartes {
 		this.mots = mots;
 	}
 
+	/**
+	 * Méthode getNom retourne le nom du générateur
+	 * @return string Le nom du générateur
+	 */
 	public String getNom() {
 		return this.nom;
 	}
@@ -30,7 +40,7 @@ class GenerateurDeCartesMot extends GenerateurDeCartes {
 
 	/**
 	 * Retourne un entier indiquant le nombre de cartes différentes disponibles dans ce thème
-	 * @param int
+	 * @return int
 	 */
 	public int nombreDeCartesDifferentes() {
 		return mots.length;
