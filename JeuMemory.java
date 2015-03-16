@@ -107,8 +107,33 @@ class JeuMemory {
 			JButton recommencer = new JButton("Recommencer");
 			recommencer.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					frame.dispose();
-					new InterfaceJeu(rangees, colonnes, delai_initial, delai_erreur, num_theme);
+					String[] types = { "Couleur", "Lettres", "Emotions", "Animaux", "Galaxie"};
+    				String choix = (String) JOptionPane.showInputDialog(
+    					null, "Choisissez un type de carte", "Nouvelle partie", JOptionPane.QUESTION_MESSAGE, null,
+        				types, types[num_theme]);
+    				
+    				int theme;
+    				switch (choix) {
+    					case "Couleur":
+    						theme = 0;
+    						break;
+    					case "Lettres":
+    						theme = 1;
+    						break;
+    					case "Emotions":
+    						theme = 2;
+    						break;
+    					case "Animaux":
+    						theme = 3;
+    						break;
+    					case "Galaxie":
+    						theme = 4;
+    						break;
+    					default:
+    						theme = 0;
+    				}
+    				frame.dispose();
+    				new InterfaceJeu(rangees, colonnes, delai_initial, delai_erreur, theme);
 				}
 			});
 
