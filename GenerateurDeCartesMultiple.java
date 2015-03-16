@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * Classe GenerateurDeCartesMultiples
  * @author Alex Marcotte
@@ -27,15 +29,23 @@ class GenerateurDeCartesMultiple extends GenerateurDeCartes {
 	 * @return Carte
 	 */
 	public Carte genereUneCarte() {
-		return new CarteCouleur(true);
+		// On choisit d'abord un générateur au hasard puis on l'utilise pour générer une carte
+		int index = new Random().nextInt(this.generateurs.length);
+		return this.generateurs[index].genereUneCarte();
 	}
 
 	/**
 	 * Retourne un entier indiquant le nombre de cartes différentes disponibles dans ce thème
+	 * Pour le générateur multiple, on regarde le nombre de cartes disponible pour chacun des
+	 * générateur individuellement puis on somme le tout.
 	 * @return int
 	 */
 	public int nombreDeCartesDifferentes() {
-		return 5;
+		int nb_de_cartes = 0;
+		for (GenerateurDeCartes generateur: generateurs) {
+			nb_de_cartes += generateur.nombreDeCartesDifferentes();
+		}
+		return nb_de_cartes;
 	}
 
 }

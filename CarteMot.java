@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.Random;
 
 /**
  * Classe CarteMot implémente une carte qui comprend un mot
@@ -25,20 +26,11 @@ class CarteMot extends Carte {
 	}
 
 	/**
-	 * Constructeur de copie
-	 * @param c 	Une carte à copier
-	 */
-	public CarteMot(Carte c) {
-		super(c);
-	}
-
-	/**
 	 * Implementation de duplique
  	 * @return Carte
  	 * @see Carte#duplique
 	 */
 	public Carte duplique() {
-		System.out.println("Duplique() dans CarteMot, recto = " + estMontree());
 		CarteMot nouvelle = new CarteMot(estMontree(), this.mot);
 		return nouvelle;
 	}

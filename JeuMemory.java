@@ -12,7 +12,7 @@ import java.awt.event.*;
 class JeuMemory {
 
 	/**
-	 * Methode main
+	 * Methode main - l'entré du programme par la ligne de commande.
 	 * @param args Paramètres entrés par ligne de commande
 	 */
 	public static void main(String[] args) {
@@ -28,7 +28,6 @@ class JeuMemory {
 		int num_theme 		= Integer.parseInt(args[4]);
 
 		InterfaceJeu jeu = new InterfaceJeu(rangees, colonnes, delai_initial, delai_erreur, num_theme);
-
 	}
 
 	/**
@@ -66,6 +65,12 @@ class JeuMemory {
 		private JFrame frame;
 		private Carte[] cartes;
 
+		// Les dictionnaires de cartes pour chacun des types
+		private String[] lettres = "abcdefghijklmnopqrstuvwxyz".split("(?!^)");
+		private String[] emotions = {"Joie", "Heureux", "Fier", "Passion", "Amour", "Outrage", "Furie", "Bougon", "Triste", "Chagrin", "Nerveux", "Souci", "Effroi", "Honte"};
+		private String[] animaux = {"images/animaux/bird.jpg", "images/animaux/camel.jpg", "images/animaux/cheetah.jpg", "images/animaux/elephant.jpg", "images/animaux/gorille.jpg", "images/animaux/hare.jpg", "images/animaux/polarbear.jpg", "images/animaux/seal.jpg", "images/animaux/tiger.jpg"};
+		private String[] galaxie = {"images/galaxie/galaxy1.jpg", "images/galaxie/galaxy2.jpg", "images/galaxie/galaxy3.jpg", "images/galaxie/galaxy4.jpg", "images/galaxie/galaxy5.jpg", "images/galaxie/galaxy6.jpg", "images/galaxie/galaxy7.jpg", "images/galaxie/galaxy8.jpg", "images/galaxie/galaxy9.jpg", "images/galaxie/galaxy10.jpg"};
+
 		/**
 		 * Constructeur pour InterfaceJeu
 		 * @param rangees			Nombre de rangées pour la grille de cartes
@@ -87,18 +92,17 @@ class JeuMemory {
 			if (num_theme == 0) { // Couleur
 				generateur = new GenerateurDeCartesCouleur("Couleurs");
 			} else if (num_theme == 1) { // Lettres
-				String[] lettres = "abcdefghijklmnopqrstuvwxyz".split("(?!^)");
 				generateur = new GenerateurDeCartesMot("Lettres", lettres);
 			} else if (num_theme == 2) { // Émotions
-				// De http://www.carrefourtpl.com/index.php?option=com_content&view=article&id=116%3Aliste-des-emotions&catid=55&lang=fr
-				String[] emotions = {"Joie", "Heureux", "Fier", "Passion", "Amour", "Outrage", "Furie", "Bougon", "Triste", "Chagrin", "Nerveux", "Souci", "Effroi", "Honte"};
 				generateur = new GenerateurDeCartesMot("Emotions", emotions);
 			} else if (num_theme == 3) { // Image animaux
-				String[] images = {"images/animaux/bird.jpg", "images/animaux/camel.jpg", "images/animaux/cheetah.jpg", "images/animaux/elephant.jpg", "images/animaux/gorille.jpg", "images/animaux/hare.jpg", "images/animaux/polarbear.jpg", "images/animaux/seal.jpg", "images/animaux/tiger.jpg"};
-				generateur = new GenerateurDeCartesImage("Animaux", images);
+				generateur = new GenerateurDeCartesImage("Animaux", animaux);
 			} else if (num_theme == 4) { // Image galaxie
-				String[] images = {"images/galaxie/galaxy1.jpg", "images/galaxie/galaxy2.jpg", "images/galaxie/galaxy3.jpg", "images/galaxie/galaxy4.jpg", "images/galaxie/galaxy5.jpg", "images/galaxie/galaxy6.jpg", "images/galaxie/galaxy7.jpg", "images/galaxie/galaxy8.jpg", "images/galaxie/galaxy9.jpg", "images/galaxie/galaxy10.jpg"};
-				generateur = new GenerateurDeCartesImage("Galaxie", images);
+				generateur = new GenerateurDeCartesImage("Galaxie", galaxie);
+			} else if (num_theme == 5) {
+				GenerateurDeCartes[] generateurs = {new GenerateurDeCartesCouleur("Couleurs"), new GenerateurDeCartesMot("Lettres", lettres),
+					new GenerateurDeCartesMot("Emotions", emotions), new GenerateurDeCartesImage("Animaux", animaux), new GenerateurDeCartesImage("Galaxie", galaxie) };
+				generateur = new GenerateurDeCartesMultiple("Multiple", generateurs);
 			}
 			
 			cartes = generateur.generePairesDeCartesMelangees(rangees*colonnes/2);
@@ -125,7 +129,7 @@ class JeuMemory {
 			JButton recommencer = new JButton("Recommencer");
 			recommencer.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					String[] types = { "Couleur", "Lettres", "Emotions", "Animaux", "Galaxie"};
+					String[] types = { "Couleur", "Lettres", "Emotions", "Animaux", "Galaxie", "Melange"};
     				String choix = (String) JOptionPane.showInputDialog(
     					null, "Choisissez un type de carte", "Nouvelle partie", JOptionPane.QUESTION_MESSAGE, null,
         				types, types[num_theme]);
@@ -147,10 +151,14 @@ class JeuMemory {
     					case "Galaxie":
     						theme = 4;
     						break;
+    					case "Melange":
+    						theme = 5;
+    						break;
     					default:
     						theme = 0;
     				}
     				frame.dispose();
+    				// On garde les mêmes paramètres sauf le thème pour la nouvelle partie
     				new InterfaceJeu(rangees, colonnes, delai_initial, delai_erreur, theme);
 				}
 			});

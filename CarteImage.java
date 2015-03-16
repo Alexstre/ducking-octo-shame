@@ -20,16 +20,6 @@ class CarteImage extends Carte {
 	public CarteImage(boolean recto, ImageIcon img) {
 		super(recto);
 		this.image = img;
-		System.out.println("Constructeur de CarteImage");
-	}
-
-	/**
-	 * Constructeur de copie
-	 * @param c 	Une carte à copier
-	 */
-	public CarteImage(Carte c) {
-		super(c);
-		System.out.println("Constructeur de copie de CarteImage");
 	}
 
 	/**
@@ -48,7 +38,6 @@ class CarteImage extends Carte {
 	 * @return boolean 	true si les cartes sont identiques
 	 */
 	public boolean rectoIdentique(Carte c) {
-		System.out.println("This: " + this.image + " Other: " + ((CarteImage)c).image);
 		return this.image.getImage().equals(((CarteImage)c).image.getImage());
 	}
 
@@ -59,7 +48,6 @@ class CarteImage extends Carte {
 	public void paintRecto(Graphics2D g) {
 		Dimension dimen = getSize();
 		g.drawImage(image.getImage(), 10, 10, dimen.width - 20, dimen.height - 20, this);
-		System.out.format("paintRecto dans CarteMot (%d, %d)%n", dimen.width, dimen.height);
 	}
 
 	/**

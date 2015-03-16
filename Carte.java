@@ -16,9 +16,6 @@ abstract class Carte extends JComponent {
 
 	protected int multi = 1;
 
-	protected int marge_x = 10;
-	protected int marge_y = 10;
-
 	/**
 	 * Constructeur pour la classe Carte
 	 * @param recto Détermine si la carte affiche son recto
@@ -81,7 +78,7 @@ abstract class Carte extends JComponent {
 	public void paintVerso(Graphics2D g) {
 		Dimension dimen = getSize();
 		g.setColor(Color.BLACK);
-		g.fillRect(marge_x, marge_y, (dimen.width - 2*marge_x) * multi, (dimen.height - 2*marge_y) * multi);
+		g.fillRect(10, 10, (dimen.width - 20) * multi, (dimen.height - 20) * multi);
 	}
 
 	/**
@@ -102,8 +99,6 @@ abstract class Carte extends JComponent {
 		} else {
 			paintVerso(g2);
 		}
-
-		System.out.println("PaintComponent dans Carte");
 	}
 
 	/**

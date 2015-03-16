@@ -26,16 +26,6 @@ class CarteCouleur extends Carte {
 	public CarteCouleur(boolean recto) {
 		super(recto);
 		this.couleur = couleurHasard();
-		System.out.println("Constructeur de CarteCouleur, recto = " + estMontree());
-	}
-
-	/**
-	 * Constructeur de copie pour CarteCouleur
-	 * @param c Une carte
-	 */
-	public CarteCouleur(Carte c) {
-		super(c);
-		System.out.println("Constructeur de copie de CarteCouleur");
 	}
 
 	/**
@@ -44,7 +34,6 @@ class CarteCouleur extends Carte {
  	 * @return Carte
 	 */
 	public Carte duplique() {
-		System.out.println("Duplique() dans CarteCouleur, recto = " + estMontree());
 		CarteCouleur nouvelle = new CarteCouleur(estMontree());
 		nouvelle.couleur = this.couleur;
 		return nouvelle;
@@ -68,8 +57,6 @@ class CarteCouleur extends Carte {
 		Dimension dimen = getSize();
 		g.setColor(this.couleur);
 		g.fillRect(10, 10, dimen.width - 20, dimen.height - 20);
-
-		System.out.format("paintRecto dans CarteCouleur (%d, %d)%n", dimen.width, dimen.height);
 	}
 
 	/**
@@ -77,7 +64,7 @@ class CarteCouleur extends Carte {
 	 * @return String
 	 */
 	public String toString() {
-		return "Carte de Couleur " + this.couleur;
+		return "Carte de Couleur: " + this.couleur;
 	}
 
 	/**

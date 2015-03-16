@@ -50,12 +50,10 @@ class ActionSourie extends MouseAdapter {
 		Carte carte = castSourceEnCarte(e.getSource());
 
 		if (derniere == null) {
-			System.out.println("Click sur une première carte");
 			derniere = carte;
 		} else {
-			System.out.println("Click sur une deuxieme carte");
 			// Il y a une carte d'affichée on les compare
-			if (!carte.rectoIdentique(derniere)) {
+			if (!carte.getClass().equals(derniere.getClass()) || !carte.rectoIdentique(derniere)) {
 				this.ignore = true;
 
 				// Début du Timer avant de retourner les cartes
