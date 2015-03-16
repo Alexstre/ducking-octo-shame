@@ -1,3 +1,6 @@
+import java.awt.*;
+import javax.swing.*;
+
 /**
  * Classe CarteImage
  * @author Alex Marcotte
@@ -7,8 +10,12 @@
 @SuppressWarnings("serial")
 class CarteImage extends Carte {
 
-	public CarteImage(boolean recto) {
+	protected boolean recto;
+	protected ImageIcon image;
+
+	public CarteImage(boolean recto, ImageIcon img) {
 		super(recto);
+		this.image = img;
 		System.out.println("Constructeur de CarteImage");
 	}
 
@@ -17,13 +24,13 @@ class CarteImage extends Carte {
 		System.out.println("Constructeur de copie de CarteImage");
 	}
 
-
 	/**
 	 * Implementation de duplique
- 	 * @return Object	 
+ 	 * @return Carte	 
 	 */
-	public Object duplique() {
-		return new Object();
+	public Carte duplique() {
+		CarteImage carte = new CarteImage(estMontree(), this.image);
+		return carte;
 	}
 
 	/**
@@ -32,15 +39,18 @@ class CarteImage extends Carte {
 	 * @return boolean true si les cartes sont identiques
 	 */
 	public boolean rectoIdentique(Carte c) {
-		return true;
+		System.out.println("This: " + this.image + " Other: " + ((CarteImage)c).image);
+		return this.image.getImage().equals(((CarteImage)c).image.getImage());
 	}
 
 	/**
 	 * Implementation de paintRecto
 	 * Methode pour peindre le verso
 	 */
-	public void paintRecto() {
-		System.out.println("paintRecto dans CarteImage");
+	public void paintRecto(Graphics2D g) {
+		Dimension dimen = getSize();
+		g.drawImage(image.getImage(), 10, 10, dimen.width - 20, dimen.height - 20, this);
+		System.out.format("paintRecto dans CarteMot (%d, %d)%n", dimen.width, dimen.height);
 	}
 
 	public String toString() {

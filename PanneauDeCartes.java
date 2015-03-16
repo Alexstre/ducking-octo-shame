@@ -13,12 +13,15 @@ import java.net.*;
 @SuppressWarnings("serial")
 class PanneauDeCartes extends JPanel {
 
+	private Carte[] cartes;
 
 	public PanneauDeCartes(int nRangees, int nColonnes, Carte[] cartes, int delaiAffichageInitial, int delaiAffichageMauvaisePaire) {
 		GridLayout layout = new GridLayout(nRangees, nColonnes);
 		layout.setHgap(10);
 		layout.setVgap(10);
 		setLayout(layout);
+
+		this.cartes = cartes;
 
 		// Ajoute les cartes au panneau
 		for (Carte carte: cartes) {
@@ -33,7 +36,7 @@ class PanneauDeCartes extends JPanel {
 		Timer timer = new Timer(delaiAffichageInitial, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Début de la partie, on veut retourner toutes les cartes
-				retourneToutesLesCartes(cartes);
+				retourneToutesLesCartes();
 				// Puis on ajoute le mouseListener aux cartes
 				for (Carte carte: cartes) {
 					carte.addMouseListener(listener);
@@ -45,9 +48,16 @@ class PanneauDeCartes extends JPanel {
 		timer.start();
 	}
 
-	private void retourneToutesLesCartes(Carte[] cartes) {
+	private void retourneToutesLesCartes() {
 		for (Carte carte: cartes) {
 			carte.retourne();
+		}
+	}
+
+	public void resoudreJeu() {
+		for (Carte carte: cartes) {
+			carte.montre();
+			carte.removeMouseListener(carte.getMouseListeners()[0]);
 		}
 	}
 

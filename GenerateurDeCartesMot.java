@@ -33,7 +33,7 @@ class GenerateurDeCartesMot extends GenerateurDeCartes {
 	 * @param int
 	 */
 	public int nombreDeCartesDifferentes() {
-		return 5;
+		return mots.length;
 	}
 
 }

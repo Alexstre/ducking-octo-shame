@@ -1,13 +1,23 @@
+import javax.swing.*;
+import java.util.Random;
+
 class GenerateurDeCartesImage extends GenerateurDeCartes {
 
-	protected String nom = "Image";
+	protected String nom = "Images";
 
-	public GenerateurDeCartesImage(String nom) {
+	protected String[] images;
+
+	public GenerateurDeCartesImage(String nom, String[] images) {
 		this.nom = nom;
+		this.images = images;
 	}
 
 	public String getNom() {
 		return this.nom;
+	}
+
+	public String[] getImages() {
+		return this.images;
 	}
 
 	/**
@@ -15,7 +25,9 @@ class GenerateurDeCartesImage extends GenerateurDeCartes {
 	 * @return Carte
 	 */
 	public Carte genereUneCarte() {
-		return new CarteImage(true);
+		int index = new Random().nextInt(this.images.length);
+		ImageIcon image = new ImageIcon(images[index]);
+		return new CarteImage(true, image);
 	}
 
 	/**
@@ -23,7 +35,7 @@ class GenerateurDeCartesImage extends GenerateurDeCartes {
 	 * @param int
 	 */
 	public int nombreDeCartesDifferentes() {
-		return 5;
+		return images.length;
 	}
 
 }
